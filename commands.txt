@@ -1,3 +1,5 @@
 npm install -g express-generator
 express --hbs
 npm install
+npm install --save-dev mocha
+npm install --save-dev request
