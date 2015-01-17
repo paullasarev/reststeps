@@ -53,4 +53,12 @@ describe('REST API for /users', function(){
 
   });
 
+  it ('should error when unknown user id', function(done){
+
+    request.get({url:url+'/1235', json:true}, function(err, res, body){
+      assert.equal(404, res.statusCode);
+      done();
+    });
+
+  });
 });
