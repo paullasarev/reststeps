@@ -2,6 +2,8 @@ var request = require('request');
 var assert = require('assert');
 var http = require('http');
 var app = require('../app');
+var _ = require('lodash');
+
 var api = app.get('api');
 
 var server = http.createServer(app);
@@ -71,8 +73,11 @@ describe('REST API for /users', function(){
   it ('should create user', function(done){
 
     request.post({url:url, json:true, body:srvUser3}, function(err, res, body){
-      var user = body;
       assert.equal(200, res.statusCode);
+
+      var user = _.find(api.data.users, srvUser3);
+      assert.ok(user);
+
       done();
     });
 
