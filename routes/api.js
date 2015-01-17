@@ -14,7 +14,11 @@ router.get('/users', function(req, res, next) {
 router.get('/users/:id', function(req, res, next) {
   var cond = {id: req.params.id};
   var user = _.find(router.data.users, cond);
-  res.send(user);
+  if (!user) {
+    res.sendStatus(404);
+  } else {
+    res.send(user);
+  }
 });
 
 module.exports = router;
