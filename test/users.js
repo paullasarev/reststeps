@@ -71,6 +71,7 @@ describe('REST API for /users', function(){
   });
 
   it ('should create user', function(done){
+    api.data.users = [srvUser, srvUser2];
 
     request.post({url:url, json:true, body:srvUser3}, function(err, res, body){
       assert.equal(200, res.statusCode);
@@ -80,6 +81,16 @@ describe('REST API for /users', function(){
 
       done();
     });
-
   });
+
+  it ('should not create existant user', function(done){
+    api.data.users = [srvUser, srvUser2];
+
+    request.post({url:url, json:true, body:srvUser2}, function(err, res, body){
+      assert.equal(400, res.statusCode);
+
+      done();
+    });
+  });
+  
 });
