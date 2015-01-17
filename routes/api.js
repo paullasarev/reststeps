@@ -24,8 +24,8 @@ router.get('/users/:id', function(req, res, next) {
 router.post('/users', function(req, res, next) {
   var user = req.body;
   var cond = {id: user.id};
-  var foundUser = _.find(router.data.users, cond);
-  if (foundUser) {
+  var found = _.find(router.data.users, cond);
+  if (found) {
     res.sendStatus(400);
   } else {
     router.data.users.push(user);
