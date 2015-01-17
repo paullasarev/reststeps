@@ -1,17 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
+router.data = {
+  users: []
+};
+
 /* GET users listing. */
 router.get('/users', function(req, res, next) {
-  var users = [
-    {
-      id: 1234,
-      name: 'user 1',
-      emain: 'name1@my.com'
-    }
-  ];
 
-  res.send(users);
+  res.send(router.data.users);
 });
 
 module.exports = router;
