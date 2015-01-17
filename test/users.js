@@ -19,6 +19,12 @@ var srvUser2 = {
   email: 'name2@my.com'
 };
 
+var srvUser3 = {
+  id: '3234',
+  name: 'user 3',
+  email: 'name3@my.com'
+};
+
 describe('REST API for /users', function(){
   before (function(done){
     api.data.users = [srvUser, srvUser2];
@@ -57,6 +63,16 @@ describe('REST API for /users', function(){
 
     request.get({url:url+'/1235', json:true}, function(err, res, body){
       assert.equal(404, res.statusCode);
+      done();
+    });
+
+  });
+
+  it ('should create user', function(done){
+
+    request.post({url:url, json:true, body:srvUser3}, function(err, res, body){
+      var user = body;
+      assert.equal(200, res.statusCode);
       done();
     });
 
