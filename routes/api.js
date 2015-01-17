@@ -23,6 +23,7 @@ router.get('/users/:id', function(req, res, next) {
 
 router.post('/users', function(req, res, next) {
   var user = req.body;
+  router.data.users.push(user);
   res.sendStatus(200);
 });
 
