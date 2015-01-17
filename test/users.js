@@ -6,10 +6,15 @@ var http = require('http');
 var server = http.createServer(app);
 var port = 3001;
 var url = 'http://localhost:' + port + '/api/users';
-var name1 = 'user 1';
+var srvUser = {
+  id: 1234,
+  name: 'user 1',
+  emain: 'name1@my.com'
+}
 
 describe('REST API for /users', function(){
   before (function(done){
+    app
     server.listen(port, done);
   });
 
@@ -19,13 +24,16 @@ describe('REST API for /users', function(){
 
   it ('should return list of users', function(done) {
     request.get({url:url, json:true}, function(err, res, body){
+      console.log(body);
       assert.equal(1, body.length);
-      assert.equal(name1, body[0].name);
+      var user = body[0];
+      assert.ok(user);
+      assert.equal(srvUser.name, user.name);
+      assert.equal(srvUser.id, user.id);
+      assert.equal(srvUser.email, user.email);
       done();
     });
 
   });
-
-
 
 });
