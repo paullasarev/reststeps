@@ -13,9 +13,15 @@ var srvUser = {
   emain: 'name1@my.com'
 };
 
+var srvUser2 = {
+  id: 2234,
+  name: 'user 2',
+  emain: 'name2@my.com'
+};
+
 describe('REST API for /users', function(){
   before (function(done){
-    api.data.users = [srvUser];
+    api.data.users = [srvUser, srvUser2];
 
     server.listen(port, done);
   });
@@ -27,8 +33,21 @@ describe('REST API for /users', function(){
   it ('should return list of users', function(done) {
     request.get({url:url, json:true}, function(err, res, body){
       // console.log(body);
-      assert.equal(1, body.length);
+      assert.equal(2, body.length);
       var user = body[0];
+      assert.ok(user);
+      assert.equal(srvUser.name, user.name);
+      assert.equal(srvUser.id, user.id);
+      assert.equal(srvUser.email, user.email);
+      done();
+    });
+
+  });
+
+  it ('should get user by id', function(done){
+
+    request.get({url:url+'/1234', json:true}, function(err, res, body){
+      var user = body;
       assert.ok(user);
       assert.equal(srvUser.name, user.name);
       assert.equal(srvUser.id, user.id);
