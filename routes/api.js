@@ -23,8 +23,14 @@ router.get('/users/:id', function(req, res, next) {
 
 router.post('/users', function(req, res, next) {
   var user = req.body;
-  router.data.users.push(user);
-  res.sendStatus(200);
+  var cond = {id: user.id};
+  var foundUser = _.find(router.data.users, cond);
+  if (foundUser) {
+    res.sendStatus(400);
+  } else {
+    router.data.users.push(user);
+    res.sendStatus(200);
+  }
 });
 
 
