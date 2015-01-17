@@ -31,14 +31,13 @@ describe('REST API for /users', function(){
   });
 
   it ('should return list of users', function(done) {
+    
     request.get({url:url, json:true}, function(err, res, body){
       // console.log(body);
       assert.equal(2, body.length);
       var user = body[0];
       assert.ok(user);
-      assert.equal(srvUser.name, user.name);
-      assert.equal(srvUser.id, user.id);
-      assert.equal(srvUser.email, user.email);
+      assert.deepEqual(srvUser, user);
       done();
     });
 
@@ -48,10 +47,7 @@ describe('REST API for /users', function(){
 
     request.get({url:url+'/1234', json:true}, function(err, res, body){
       var user = body;
-      assert.ok(user);
-      assert.equal(srvUser.name, user.name);
-      assert.equal(srvUser.id, user.id);
-      assert.equal(srvUser.email, user.email);
+      assert.deepEqual(srvUser, user);
       done();
     });
 
