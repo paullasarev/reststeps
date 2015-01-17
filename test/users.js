@@ -8,15 +8,15 @@ var server = http.createServer(app);
 var port = 3001;
 var url = 'http://localhost:' + port + '/api/users';
 var srvUser = {
-  id: 1234,
+  id: '1234',
   name: 'user 1',
-  emain: 'name1@my.com'
+  email: 'name1@my.com'
 };
 
 var srvUser2 = {
-  id: 2234,
+  id: '2234',
   name: 'user 2',
-  emain: 'name2@my.com'
+  email: 'name2@my.com'
 };
 
 describe('REST API for /users', function(){
@@ -31,7 +31,7 @@ describe('REST API for /users', function(){
   });
 
   it ('should return list of users', function(done) {
-    
+
     request.get({url:url, json:true}, function(err, res, body){
       // console.log(body);
       assert.equal(2, body.length);
