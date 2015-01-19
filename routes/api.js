@@ -6,6 +6,7 @@ var router = express.Router();
 router.data = {
   users: []
 };
+router.data.users = require('../mock/case1/users.js');
 
 router.get('/users', function(req, res, next) {
   res.send(router.data.users);
