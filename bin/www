@@ -8,6 +8,10 @@ var app = require('../app');
 var debug = require('debug')('reststeps:server');
 var http = require('http');
 
+
+var api = app.get('api');
+api.data.users = require('../mock/case1/users');
+
 /**
  * Get port from environment and store in Express.
  */
